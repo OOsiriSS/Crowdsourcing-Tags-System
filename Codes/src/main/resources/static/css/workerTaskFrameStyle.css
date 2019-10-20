@@ -1,0 +1,173 @@
+/*发起者表格style*/
+body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arail, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#ul1 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    background-color: #e6f2f4;
+    position: fixed;
+    height:704px;
+    overflow: auto;
+}
+
+li #a1 {
+    display: block;
+    color: #0a598d;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+#name{
+    font-size:16px;
+    color:orange;
+
+}
+
+#userID{
+    margin-top:60px;
+}
+
+li #a2 {
+    display: block;
+    background-color: #4C76af;
+    color:#d9e6ee;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* 鼠标移动到选项上修改背景颜色 */
+li #a1:hover {
+    background-color: #4C76af;
+    color: #d9e6ee;
+}
+
+#table{
+    margin-left:100px;
+    margin-top:50px;
+    padding-right: 200px;
+    float:left;
+}
+
+table{
+
+    width:1150px;
+}
+th{
+    height: 25px;
+    background-color: #4C76af;
+    color: #e6f2f4;
+    font-weight: 400;
+
+
+}
+td{
+    text-align: center;
+}
+#td1{
+    background-color: #b7ddf2;
+}
+#td1:hover{
+    background-color: #698cbb;
+    color: #d9e6ee;
+}
+
+
+p,h1,form,button{border:0;margin:0;padding:0;}
+
+.Frame{
+
+    margin:0 auto;width:160px;height:704px;padding:0px;background-color: #e6f2f4 ;
+    position:absolute;top:55px;
+
+
+}
+
+.mainFrame{
+    margin:0 auto;width:1370px;height:704px;padding:10px;background-color: #eef7f7 ;
+    position:absolute;top:55px;left: 160px;
+}
+#ranking{
+    position: absolute;
+    left:105px;
+    top:160px;
+}
+
+#score{
+    position: absolute;
+    left:105px;
+    top:20px;
+}
+
+#edit{
+    margin-top:30px;
+    width:100px;
+    height:35px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#labelButton{
+    position: absolute;
+    left:110px;
+    bottom:100px;
+    width:80px;
+    height:30px;
+
+}
+
+#deleteButton{
+    position: absolute;
+    left:230px;
+    bottom:100px;
+
+
+    width:80px;
+    height:30px;
+
+}
+#display{
+    margin-top:30px;
+    width:100px;
+    height:35px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.container{
+    position: absolute;
+    top:10px;
+    left:700px;
+}
+#backButton{
+    position: absolute;
+    right:100px;
+    bottom:100px;
+
+
+    width:80px;
+    height:30px;
+
+}
+
+#submitButton{
+    position: absolute;
+    left:100px;
+    bottom:100px;
+
+
+    width:80px;
+    height:30px;
+}
+
+#read{
+    position: absolute;
+    left:100px;
+    top:550px;
+}
+
+
+#stylized{border:solid 2px #aacfe4;}

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/workerTaskFrameStyle.css"/>
+    <title>查看排名</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var uid;
+            var url = window.location.search;
+            if (url.indexOf("?") != -1) {
+                uid = url.substr(url.indexOf("=") + 1);
+                $.ajax({
+                    type: "post",
+                    async: true,
+                    url: "/getRanking",
+                    data: {id: uid},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        $("#name").append(data.userInfo.uname);
+                        $("#userID").append(data.userInfo.uid);
+                        $("#type").append(data.userInfo.type);
+                        $("#point").append(data.userInfo.point);
+                        $("#score").append(data.userInfo.point);
+                        $("#ranking").append(data.rank);
+
+                        var str = "";
+
+                        $.each(data.rankedUserInfo, function (i) {
+                            str += "<tr>" +
+                                "<td width=25% height=100px bgcolor='#c7a0ff'>" + data.rankedUserInfo[i].uid + "</td>" +
+                                "<td width=25% height=100px bgcolor='#c7a0ff'>" + data.rankedUserInfo[i].uname + "</td>" +
+                                "<td width=25% height=100px bgcolor='#c7a0ff'>" + data.rankedUserInfo[i].point + "</td>" +
+                                "<td width=25% height=100px bgcolor='#c7a0ff'>" + data.rankedUserInfo[i].lNum + "</td>" +
+                                "</tr>";
+                        });
+                        document.getElementById("data").innerHTML = str;
+
+                        $("#data tr").dblclick(function () {
+                            var td = $(this).find("td");
+                            var a = td.eq(0).html();
+                            addNewLine(a);
+                        });
+                    }
+                })
+
+            }
+
+        }
+    </script>
+
+</head>
+
+
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" role="navigation" style="background-color: darkcyan">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">众包标注平台</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" onclick="mainPage()">主页</a>
+            </li>
+
+
+            <li class="nav-item dropdown" >
+
+                <a class="nav-link"  onclick="workStation()">工作台</a>
+
+
+            </li>
+            <li class="nav-item "  >
+                <a class="nav-link"  onclick="message()" >消息</a>
+            </li>
+            <li class="nav-item "  >
+                <a class="nav-link"  onclick="checkRanking()" >查看排名</a>
+            </li>
+
+        </ul>
+        <div class="collapse navbar-collapse justify-content-end">
+
+            <form class="navbar-form " role="logout">
+                <button type="button" class="btn btn-warning btn-sm" onclick="logout()">
+                    登出
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<br>
+
+<div id="stylized" class="Frame">
+    <img src="css/pictures/头像.png" height="150px" width="150px" align="center">
+    <p align="center" id="name">您好，</p>
+    <p align="center" id="userID">用户ID：</p>
+    <p align="center" id="type">用户身份：</p>
+    <p align="center" id="point">积分：</p>
+    <p></p>
+
+    <div align="center">
+        <button type="button" id="edit" class="btn btn-warning btn-sm"  onclick="editUser()"> 编辑信息</button>
+        <button type="button" id="display" class="btn btn-info btn-sm"  onclick="show()"> 展示图表</button>
+    </div>
+
+
+</div>
+
+<div id="stylized" class="mainFrame">
+
+    <br>
+    <label align="left" id="score">您的积分是：</label>
+    <label align="left" id="ranking">您的排名是：</label>
+    <div id="container" class="container" style="width:580px;height:300px;"></div>
+    <br><br><br><br><br><br>
+    <script>
+        var url = window.location.search;
+        var uid = url.substr(5, 5);
+        var chart=null;
+
+
+        var chart=null;
+        $(function() {
+            chart = new Highcharts.Chart({
+                chart:{
+                    renderTo:'container',
+                    backgroundColor:'#eef7f7'
+
+                },
+                title: {
+                    text: '您的近10次标注结果评分',
+                    x: -20
+                },
+
+                xAxis: {},
+                yAxis: {
+                    title: {
+                        text: '评分'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ''
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: []
+            });
+        });
+        function show() {
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/getLatestTenTaskCountInfo",
+                data: {uid: uid},
+                dataType: 'json',
+                success: function (data) {
+
+                    var aa=[1, 2, 3, 4 ,5, 6, 7, 8, 9, 10];
+                    var b=new Array();
+                    for(var i=0;i<=data.count.length;i++){
+
+                        b[i]=data.count[i];
+                    }
+
+                    chart.xAxis[0].categories = aa;
+                    var series = chart.addSeries({
+                        name: '工人' + uid,
+                        data: b
+                    }, true);
+
+                }
+            })
+        }
+
+        function addNewLine(a) {
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/getLatestTenTaskCountInfo",
+                data: {uid: a},
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    var aa=[1, 2, 3, 4 ,5, 6, 7, 8, 9, 10];
+                    var b=new Array();
+                    for(var i=0;i<=data.count.length;i++){
+
+                        b[i]=data.count[i];
+                    }
+
+                    chart.xAxis[0].categories = aa;
+                    var series = chart.addSeries({
+                        name: '工人' + a,
+                        data: b
+                    }, true);
+
+                }
+            })
+        }
+
+
+
+    </script>
+
+
+
+    <br><br><br><br>
+
+    <TABLE  id="table"style="BORDER-COLLAPSE: collapse" borderColor=#111111 cellSpacing=1 cellPadding=0 width=400 border=0>
+        <TR>
+            <TD>
+                <TABLE cellSpacing=1 cellPadding=0 width="100%" align=left summary="" border=0 >
+                    <TR>
+                        <TD align=left bgColor=#2B30FF colSpan=4><FONT color=#ffffff size=2>众包工人排名</FONT></TD>
+                    </TR>
+                    <TR>
+                        <TD width="25%" bgColor=#FFF1CC><FONT size=2>ID</FONT></TD>
+                        <TD width="25" bgColor=#FFF1CC><FONT size=2>姓名</FONT></TD>
+                        <TD width="25" bgColor=#FFF1CC><FONT size=2>积分</FONT></TD>
+                        <TD width="25" bgColor=#FFF1CC><FONT size=2>排名</FONT></TD>
+
+                    </TR>
+                </TABLE>
+                <DIV style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 300px">
+                <TABLE style="BORDER-COLLAPSE: collapse" borderColor=#111111 height=250 rules="all" cellSpacing=1
+                       cellPadding=12 width="99%">
+                    <tbody id="data"></tbody>
+                </TABLE>
+                </DIV>
+
+
+                </TBODY>
+            </TD>
+        </TR>
+
+        </TBODY>
+    </TABLE>
+    </TABLE>
+
+</div>
+
+
+
+
+
+</body>
+<script>
+    var url = window.location.search;
+    var uid = url.substr(url.indexOf("=") + 1);
+    if (url.indexOf("?") != -1) {
+        uid = url.substr(url.indexOf("=") + 1);
+    }
+    function editUser() {
+        window.location.href="editUser2.html?uid=" + uid;
+    }
+
+
+    function mainPage(){
+        window.location.href = "workerMainFrame.html?uid=" + uid ;
+    }
+
+    function workStation() {
+        window.location.href = "workerTaskFrame.html?uid=" + uid ;
+    }
+
+    function message(){
+        window.location.href = "workerMessageFrame.html?uid=" + uid ;
+    }
+
+    function logout() {
+        window.location.href="login.html"
+    }
+
+    function checkRanking() {
+        window.location.href="checkRanking.html?uid="+uid;
+    }
+
+</script>

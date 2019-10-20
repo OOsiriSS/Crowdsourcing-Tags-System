@@ -1,0 +1,82 @@
+/* 管理员style*/
+body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arail, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#ul1 {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 160px;
+    background-color: #e6f2f4;
+    position: fixed;
+    height:704px;
+    overflow: auto;
+}
+
+li #a1 {
+    display: block;
+    color: #0a598d;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+li #a2 {
+    display: block;
+    background-color: #4C76af;
+    color:#d9e6ee;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* 鼠标移动到选项上修改背景颜色 */
+li #a1:hover {
+    background-color: #4C76af;
+    color: #d9e6ee;
+}
+
+table{
+    width:1150px;
+}
+th{
+    height: 25px;
+    background-color: #e6f2f4;
+    color: #e6f2f4;
+    font-weight: 400;
+
+
+}
+td{
+    text-align: center;
+}
+
+
+
+
+p,h1,form,button{border:0;margin:0;padding:0;}
+
+.Frame{
+
+    margin:0 auto;width:160px;height:704px;padding:0px;background-color: #e6f2f4 ;
+    position:absolute;top:55px;
+
+
+}
+
+.mainFrame{
+    margin:0 auto;width:1370px;height:704px;padding:10px;background-color: #eef7f7 ;
+    position:absolute;top:55px;left: 160px;
+}
+
+#stylized{border:solid 2px #aacfe4;}
+
+#display{
+    position: absolute;
+    left:1100px;
+}
+.container{
+    position: absolute;
+    left:50px;
+    top:400px;
+}

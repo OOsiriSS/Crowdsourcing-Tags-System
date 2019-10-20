@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>第一个 Highcharts 图表</title>
+    <script>
+
+    </script>
+</head>
+<body>
+<!-- 图表容器 DOM -->
+<div id="container" style="width: 600px;height:400px;"></div>
+<button type="button" onclick="f()">点我</button>
+<!-- 引入 highcharts.js -->
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script>
+    function f() {
+
+
+        // 图表配置
+        var chart = Highcharts.chart('container', {
+            title: {
+                text: '2014 某网站各浏览器浏览量占比'
+            },
+            tooltip: {
+                headerFormat: '{series.name}<br>',
+                pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,  // 可以被选择
+                    cursor: 'pointer',       // 鼠标样式
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: '浏览器访问量占比',
+                data: [
+                    ['Firefox', 45.0],
+                    ['IE', 26.8],
+                    {
+                        name: 'Chrome',
+                        y: 12.8,
+                        sliced: true,  // 默认突出
+                        selected: true // 默认选中
+                    },
+                    ['Safari', 8.5],
+                    ['Opera', 6.2],
+                    ['其他', 0.7]
+                ]
+            }]
+        });
+    }
+</script>
+</body>
+</html>

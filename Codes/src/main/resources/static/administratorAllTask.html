@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head><!--包含了文档的meta数据-->
+
+    <!--link标签定义了文档与外部资源之间的关系，通常用于链接到样式表-->
+    <link rel="stylesheet" type="text/css" href="css/checkFrameStyle.css"/>
+    <!--title标签描述了文档标题-->
+    <title>所有任务</title>
+    <!--meta标签描述了一些基本的元数据-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--bootstrap库-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script>
+        window.onload = function () {
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/showTaskInfo",
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    var str = "";
+                    $("#unFinishNum").append(data.unFinishNum);
+                    $("#finishNum").append(data.finishNum);
+                    $.each(data.taskInfo, function (i) {
+                        str += "<tr>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].tid + "</font></td>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].tname + "</font></td>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].sponsor + "</font></td>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].reward + "</font></td>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].bonus + "</font></td>" +
+                            "<td width=80px height=10px bgcolor='#c7a0ff'><font size='2'>" + data.taskInfo[i].finishProcess + "</font></td>" +
+                            "</tr>";
+                    });
+                    document.getElementById("taskInfo").innerHTML = str;
+                }
+            })
+        }
+    </script>
+
+    <script>function checkUser() {
+        window.location.href="administratorAllUser.html"
+
+    }</script>
+    <script>function checkTask() {
+        window.location.href="administratorAllTask.html"
+
+    }</script>
+    <script>function logOut() {
+        window.location.href="Login.html"
+    }
+    </script>
+    <script>
+        function main() {
+            window.location.href = "administratorMainFrame.html";
+        }
+    </script>
+
+
+</head>
+
+
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" role="navigation" style="background-color: darkcyan">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">众包标注平台</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link"  onclick="main()">主页</a>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+                    查看信息
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item"  onclick="checkUser()">查看用户</a>
+
+                    <a class="dropdown-item" onclick="checkTask()">查看任务</a>
+
+                </div>
+            </li>
+
+
+        </ul>
+        <div class="collapse navbar-collapse justify-content-end">
+
+            <form class="navbar-form " role="logout">
+                <button type="button" class="btn btn-warning btn-sm"  onclick="logOut()">
+                    登出
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<br>
+
+<div id="stylized" class="Frame">
+    <ul id="ul1">
+        <li><a id="a2" href="administratorAllTask.html">所有任务</a></li>
+        <li><a id="a1" href="administratorUnfinishedTask.html">进行中任务</a></li>
+        <li><a id="a1" href="administratorFinishedTask.html">已完成任务</a></li>
+    </ul>
+
+
+
+
+</div>
+
+<div id="stylized" class="mainFrame" >
+    <p id="unFinishNum">进行中任务数：</p>
+    <p id="finishNum">已完成任务数：</p>
+
+    <TABLE style="BORDER-COLLAPSE: collapse" cellSpacing=1 cellPadding=0 width=500 border=0>
+        <TR>
+            <TD>
+                <TABLE rules="all" cellSpacing=1 cellPadding=0 width=400px align=left summary="" border=0>
+                    <TR>
+                        <TD align=left bgcolor="#2b30ff" colSpan=6><FONT color=#ffffff size=2>任务列表</FONT></TD>
+                    </TR>
+                    <TR>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">任务ID</FONT></TD>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">任务名</FONT></TD>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">发起者</FONT></TD>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">基础奖励</FONT></TD>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">额外奖励</FONT></TD>
+                        <TD width=80px bgcolor="#fff1cc"><FONT size="2">完成进度</FONT></TD>
+                    </TR>
+                </TABLE>
+            </TD>
+        </TR>
+        <TR>
+            <TD>
+                <DIV style="OVERFLOW: auto; WIDTH: 100%; HEIGHT: 300px">
+                    <TABLE style="BORDER-COLLAPSE: collapse" rules="all" border="0" height=250 cellSpacing=1
+                           cellPadding=0 width=500px>
+                        <tbody id="taskInfo"></tbody>
+                    </TABLE>
+                </DIV>
+            </TD>
+        </TR>
+    </TABLE>
+</div>
+
+
+
+
+
+</body>

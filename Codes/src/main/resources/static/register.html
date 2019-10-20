@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/registerStyle.css"/>
+    <title>注册</title>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script charset="UTF-8">
+        window.onload = function () {
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/getNewUserID",
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#idT").val(data.id);
+                }
+            })
+        }
+    </script>
+    <script>
+        function f() {
+            window.location.href = "Login.html";
+        }
+
+        function check() {
+            var name = $("#name").val();
+            var password = $("#password").val();
+            var password1 = $("#password1").val();
+            if (name == "" || password == "" || password1 == "") {
+                alert("输入不能为空！！！");
+                return false;
+            } else if (password != password1) {
+                alert("两次输入的密码不同！！！");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function registerService() {
+            if (!check()) {
+                return;
+            }
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/registerService",
+                data: {
+                    uid: $("#idT").val(),
+                    uname: $("#name").val(),
+                    type: $("#type option:checked").text(),
+                    password: $("#password").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    alert("注册成功！！！\n您的id是" + data.uid + ",您的身份是" + data.type);
+                    window.location.href = "Login.html";
+                }
+            })
+        }
+    </script>
+
+</head>
+<meta charset="UTF-8">
+<body>
+
+<!-- 空iframe，用于协助处理form提交后不进行页面跳转的问题 -->
+<iframe id="iframe_display" name="iframe_display" style="display: none;"></iframe>
+
+<div id="stylized" class="myform">
+    <form id="form1" name="form1" method="post/get" action="" target="iframe_display">
+        <h1>注册</h1>
+        <p>请准确填写个人信息.../
+        <p>
+            <label>id</label>
+
+            <input type="text" name="textField" id="idT" disabled="disabled"/>
+            <select id="type">
+                <option value="worker">众包工人</option>
+                <option value="saab">众包发起者</option>
+
+            </select>
+            <label>姓名</label>
+            <input type="text" name="textField" id="name"/>
+            <label>密码</label>
+            <input type="password" name="password" id="password"/>
+            <label>确认密码</label>
+            <input type="password" name="password" id="password1"/>
+            <button type="submit" value="submit" onclick="registerService()">确定</button>
+            <button type="button" onclick="f()">取消</button>
+
+    </form>
+</div>
+
+
+</body>

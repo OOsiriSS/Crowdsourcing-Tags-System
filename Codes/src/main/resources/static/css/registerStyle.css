@@ -1,0 +1,111 @@
+﻿body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arail, Helvetica, sans-serif;
+    font-size: 12px;
+    background-image: url("pictures/LoginBackground.jpg");
+    background-size: 100% 760px;
+    background-repeat: no-repeat;
+}
+
+p, h1, form, button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.spacer {
+    clear: both;
+    height: 1px;
+}
+
+.myform {
+    margin: 0 auto;
+    width: 300px;
+    padding: 14px;
+    background-color: #aaaaaa;
+    position: absolute;
+    top: 38%;
+    right: 17%;
+}
+
+#idT {
+    float: left;
+    font-size: 12px;
+    padding: 4px 2px;
+    margin: 2px 0 20px 10px;
+    margin-top: 10px;
+    border: solid 1px #aacfe4;
+    width: 80px !important;
+}
+
+#stylized {
+    border: solid 2px #b7ddf2;
+}
+
+#stylized h1 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#stylized p {
+    font-size: 11px;
+    color: #666666;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #b7ddf2;
+}
+
+#stylized select {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 24px;
+    margin-bottom: 20px;
+    background-color: aliceblue;
+    opacity: 0.7;
+}
+
+#stylized label {
+    display: block;
+    width: 60px;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: right;
+    float: left;
+}
+
+#stylized input {
+    float: left;
+    font-size: 12px;
+    padding: 4px 2px;
+    margin: 2px 0 20px 10px;
+    margin-top: 10px;
+    border: solid 1px #aacfe4;
+    width: 200px;
+}
+
+#stylized button {
+    clear: both;
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70px;
+    height: 31px;
+    background: #b7ddf2 no-repeat;
+    opacity: 70%;
+    text-align: center;
+    line-height: 31px;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+input:focus, button:focus {
+    outline: thick solid #b7ddf2
+}
+
+input:active, button:active {
+    outline: thick solid #aaa
+}

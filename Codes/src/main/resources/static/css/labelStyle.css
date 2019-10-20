@@ -1,0 +1,105 @@
+.box{
+    margin:0 auto;width:100px;height:700px;padding:20px;background-color: #aaaaaa ;
+    position:absolute;top:60px;
+}
+
+.box2{
+    margin:0 auto;width:250px;height:700px;;background-color:#FFFFFF ;
+    position:absolute;top:60px;left:1235px;
+}
+
+.box3 {
+    margin: 0 auto;
+    width: 1100px;
+    height: 700px;;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 60px;
+    left: 123px;
+}
+
+
+#stylized{border:solid 2px #FFFFFF;}
+
+#stylized2{border:solid 2px #FFFFFF;}
+
+#stylized3 {
+    border: solid 2px #FFFFFF;
+}
+
+#areaLabel{
+    width:45px;
+    height:45px;
+    margin-left:5px;
+    margin-top:0px;
+    cursor: hand;
+
+}
+
+#recLabel{
+    width:45px;
+    height:40px;
+    margin-left:5px;
+    margin-top:25px;
+    cursor: hand;
+
+}
+
+#bubble{
+    width:45px;
+    height:45px;
+    margin-left:5px;
+    margin-top:25px;
+    cursor: hand;
+
+}
+
+#undo{
+    width:45px;
+    height:45px;
+    margin-left:5px;
+    margin-top:25px;
+    cursor: hand;
+
+}
+
+#save{
+    width:60px;
+    height:60px;
+    margin-left:0px;
+    margin-top:300px;
+    cursor: hand;
+
+}
+
+
+
+
+#color{
+    height:25px;
+    width:60px;
+    margin-top:30px;
+    cursor: hand;
+}
+
+
+
+#stylized2 textarea{
+    width:250px;
+    height:100px;
+    border:1px solid black;
+    float:left;
+    visibility:hidden;
+}
+
+
+
+
+
+canvas{
+    border: 1px solid red;
+    position:absolute;
+    left:123px;
+    top:60px;
+
+}

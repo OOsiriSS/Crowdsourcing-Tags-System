@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head><!--包含了文档的meta数据-->
+
+    <!--link标签定义了文档与外部资源之间的关系，通常用于链接到样式表-->
+    <link rel="stylesheet" type="text/css" href="css/mainFrameStyle.css"/>
+    <!--title标签描述了文档标题-->
+    <title>管理员主界面</title>
+    <!--meta标签描述了一些基本的元数据-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--bootstrap库-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script>function checkUser() {
+        window.location.href="administratorAllUser.html"
+        
+    }</script>
+    <script>function checkTask() {
+        window.location.href="administratorAllTask.html"
+
+    }</script>
+    <script>function logOut() {
+        window.location.href="Login.html"
+    }
+    </script>
+
+
+</head>
+
+
+
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" role="navigation" style="background-color: darkcyan">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">众包标注平台</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" >主页</a>
+            </li>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"  id="navbardrop" data-toggle="dropdown">
+                    查看信息
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item"  onclick="checkUser()">查看用户</a>
+
+                    <a class="dropdown-item"  onclick="checkTask()">查看任务</a>
+
+                </div>
+            </li>
+
+
+        </ul>
+        <div class="collapse navbar-collapse justify-content-end">
+
+            <form class="navbar-form " role="logout">
+                <button type="button" class="btn btn-warning btn-sm" href="#" onclick="logOut()">
+                    登出
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<br>
+
+<div id="stylized" class="Frame">
+    <img src="css/pictures/头像.png" height="150px" width="150px" align="center">
+    <p align="center" id="name">您好，admin</p>
+    <p align="center" id="userID">用户ID：00000</p>
+    <p align="center">用户身份：管理员</p>
+    <p align="center">积分：0</p>
+    <p></p>
+
+
+
+</div>
+
+<div id="stylized" class="mainFrame"></div>
+
+
+
+
+
+</body>
+</html>
